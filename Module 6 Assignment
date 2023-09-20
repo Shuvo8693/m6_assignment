@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: PhotoGallery()));
+}
+
+class PhotoGallery extends StatelessWidget {
+  List<String> PicUrl = [
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+    'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+  ];
+  PhotoGallery({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Photo Gallery'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            ListTile(
+              title: Text('Welcome To My Gallery'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white54,
+                  filled: true,
+                  hintText: 'Search Photos...',
+                  hintStyle: TextStyle(color: Colors.black26),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              itemCount: 6,
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(0.5),
+                  child: ListTile(
+                    title: Image.network(
+                      PicUrl[index],
+                      height: 70,
+                      width: 70,
+                    ),
+                    subtitle: Text('Picture $index',textAlign:TextAlign.center),
+
+                    onTap: () {
+                      const snackbar = SnackBar(content: Text('MaashaAllah'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Image.network(
+                'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'Photo 1',
+                style: TextStyle(fontSize: 15),
+              ),
+              subtitle: Text('Description For Photo 1'),
+              subtitleTextStyle: TextStyle(fontSize: 12),
+            ),
+            ListTile(
+              leading: Image.network(
+                'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'Photo 2',
+                style: TextStyle(fontSize: 15),
+              ),
+              subtitle: Text('Description For Photo 2'),
+              subtitleTextStyle: TextStyle(fontSize: 12),
+            ),
+            ListTile(
+              leading: Image.network(
+                'https://mecca.net/data1/images/islamic-photos/5/1.jpg',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'Photo 3',
+                style: TextStyle(fontSize: 15),
+              ),
+              subtitle: Text('Description For Photo 3'),
+              subtitleTextStyle: TextStyle(fontSize: 12),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Photo Upload SuccessFully'),
+                ));
+              },
+              child: Icon(Icons.upload),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
